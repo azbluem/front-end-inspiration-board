@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [boardList, setBoardList] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState('Select a board from the board list');
+  const [cards, setCards] = useState([])
 
   const URL = "http://127.0.0.1:5000/board";
 
@@ -41,6 +42,17 @@ function App() {
 
       }
     } setSelectedBoard(`${chosenBoard.title} - ${chosenBoard.owner}`)
+    renderCards(chosenBoard)
+  }
+
+  const renderCards = (board) => {
+    const cardList = board.cards.sort((a,b)=>(a.id>b.id)?-1:1)
+    const range = Math.min(9,cardList.length)
+    const returnCards = []
+    for (let i=0;i<range;i++) {
+      returnCards.push(cardList[i])
+    }
+    setCards(returnCards)
   }
 
   return (
@@ -58,7 +70,7 @@ function App() {
         <NewBoardForm></NewBoardForm>
       </div>
       <div className="card-container">
-        <CardContainer></CardContainer>
+        <CardContainer cardList ={cards}></CardContainer>
       </div>
       <div className="new-card-form">
         <NewCardForm></NewCardForm>
