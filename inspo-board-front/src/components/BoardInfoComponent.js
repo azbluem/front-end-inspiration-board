@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 
 const BoardInfo = (props) => {
-  return "This is BoardInfo";
+  const boardInfoString = props.selectedBoard;
+
+  return <div>{boardInfoString}</div>;
 };
 
-BoardInfo.propTypes = {};
+BoardInfo.propTypes = {
+  selectedBoard: PropTypes.string.isRequired,
+};
 
 export default BoardInfo;

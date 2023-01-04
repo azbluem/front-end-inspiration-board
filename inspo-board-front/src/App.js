@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [boardList, setBoardList] = useState([]);
+  const [selectedBoard, setSelectedBoard] = useState('Select a board from the board list');
 
   const URL = "http://127.0.0.1:5000/board";
 
@@ -30,16 +31,28 @@ function App() {
 
   useEffect(getAllBoards, []);
 
+  const selectBoard = (boardId)=> {
+    // console.log('select board clicked')
+    let chosenBoard ;
+    for (const board of boardList) {
+      if (board.id === boardId) {
+        chosenBoard = board ;
+        break
+
+      }
+    } setSelectedBoard(`${chosenBoard.title} - ${chosenBoard.owner}`)
+  }
+
   return (
     <div>
       <div className="header">
         <header>Inspiration Board</header>
       </div>
       <div className="board-list">
-        <BoardList boardList={boardList}></BoardList>
+        <BoardList boardList={boardList} selectBoard={selectBoard}></BoardList>
       </div>
       <div className="board-info">
-        <BoardInfo></BoardInfo>
+        <BoardInfo selectedBoard ={selectedBoard}></BoardInfo>
       </div>
       <div className="new-board-form">
         <NewBoardForm></NewBoardForm>
