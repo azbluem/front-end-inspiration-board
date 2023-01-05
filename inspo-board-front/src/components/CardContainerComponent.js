@@ -5,7 +5,7 @@ const CardContainer = (props) => {
   const cardList = props.cardList;
   const deleteCard = props.deleteCard
   const cardRenders = cardList.map((card)=>{
-    return <div><Card key={card.id} id={card.id} message={card.message} likes={card.likes} deleteCard={deleteCard}/></div>
+    return <div key={card.id}><Card id={card.id} message={card.message} likes={card.likes} deleteCard={deleteCard}/></div>
   })
 
   return (<div>

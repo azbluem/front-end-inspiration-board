@@ -22,14 +22,23 @@ const NewCardForm = ({addCard}) => {
     setCardFormData(INITIAL_CARD_DATA);
   }
 
+  const SubmitButton = () => {
+    if (cardFormData.message) {
+      return <button type='submit'>Add Card</button>
+    }
+    else {
+      return <button type='submit' disabled>Add Card</button>
+    }
+  }
+
   return <div>
     <form onSubmit={submitCardForm}>
       <label htmlFor='message'>Message: </label>
-      <input type='text' id='message' name='message' value={cardFormData.title} onChange={handleFormChange}></input>
+      <input type='text' id='message' name='message' value={cardFormData.message} onChange={handleFormChange}></input>
       <br></br>
       <p>Preview: {cardFormData.message}</p>
       <br></br>
-      <input type='submit' value='Add Card'></input>
+      <SubmitButton/>
       </form></div>}
 
 NewCardForm.propTypes = {

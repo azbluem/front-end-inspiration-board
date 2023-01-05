@@ -23,6 +23,15 @@ const NewBoardForm = ({addBoard}) => {
     setBoardFormData(INITIAL_BOARD_DATA);
   }
 
+  const SubmitButton = () => {
+    if (boardFormData.title && boardFormData.owner) {
+      return <button type='submit'>Add Board</button>
+    }
+    else {
+      return <button type='submit' disabled>Add Board</button>
+    }
+  }
+
   return <div>
     <form onSubmit={submitBoardForm}>
       <label htmlFor='title'>Title: </label>
@@ -33,7 +42,7 @@ const NewBoardForm = ({addBoard}) => {
       <br></br>
       <p>Preview: {boardFormData.title} - {boardFormData.owner}</p>
       <br></br>
-      <input type='submit' value='Add Board'></input>
+      <SubmitButton/>
 
     </form>
 
