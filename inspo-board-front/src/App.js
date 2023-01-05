@@ -9,7 +9,8 @@ import "./App.css";
 
 function App() {
   const [boardList, setBoardList] = useState([]);
-  const [selectedBoard, setSelectedBoard] = useState('Select a board from the board list');
+  const [selectedBoard, setSelectedBoard] = useState({ board :{},
+    message :'Select a board from the board list'});
   const [selectedBoardId, setSelectedBoardId] = useState(-1)
   const [cards, setCards] = useState([])
 
@@ -43,8 +44,9 @@ function App() {
 
       }
     } setSelectedBoardId(chosenBoard.id)
-    setSelectedBoard(`${chosenBoard.title} - ${chosenBoard.owner}`)
+    setSelectedBoard({board : chosenBoard, message:`${chosenBoard.title} - ${chosenBoard.owner}`})
     renderCards(chosenBoard.cards)
+    
   }
 
   const addBoard = (newBoardData) => {
@@ -98,7 +100,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='container'>
       <div className="header">
         <header>Inspiration Board</header>
       </div>
@@ -106,13 +108,13 @@ function App() {
         <BoardList boardList={boardList} selectBoard={selectBoard}></BoardList>
       </div>
       <div className="board-info">
-        <BoardInfo selectedBoard ={selectedBoard}></BoardInfo>
+        <BoardInfo selectedBoard ={selectedBoard.message}></BoardInfo>
       </div>
       <div className="new-board-form">
         <NewBoardForm addBoard={addBoard}></NewBoardForm>
       </div>
       <div className="card-container">
-        <CardContainer cardList ={cards} deleteCard={deleteCard}></CardContainer>
+        <CardContainer cardList ={cards} deleteCard={deleteCard} boardTitle ={selectedBoard.board.title}></CardContainer>
       </div>
       <div className="new-card-form">
         <NewCardForm addCard={addCard}></NewCardForm>

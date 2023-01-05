@@ -32,6 +32,7 @@ const NewCardForm = ({addCard}) => {
   }
 
   return <div>
+    <h2>Create a New Card</h2>
     <form onSubmit={submitCardForm}>
       <label htmlFor='message'>Message: </label>
       <input type='text' id='message' name='message' value={cardFormData.message} onChange={handleFormChange}></input>

@@ -33,6 +33,7 @@ const NewBoardForm = ({addBoard}) => {
   }
 
   return <div>
+    <h2>Create a Board</h2>
     <form onSubmit={submitBoardForm}>
       <label htmlFor='title'>Title: </label>
       <input type='text' id='title' name='title' value={boardFormData.title} onChange={handleFormChange}></input>
