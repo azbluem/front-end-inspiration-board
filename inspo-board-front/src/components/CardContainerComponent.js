@@ -3,8 +3,9 @@ import Card from '../components/CardComponent.js'
 
 const CardContainer = (props) => {
   const cardList = props.cardList;
+  const deleteCard = props.deleteCard
   const cardRenders = cardList.map((card)=>{
-    return <div><Card key={card.id} id={card.id} message={card.message}/></div>
+    return <div><Card key={card.id} id={card.id} message={card.message} likes={card.likes} deleteCard={deleteCard}/></div>
   })
 
   return (<div>
@@ -14,7 +15,8 @@ const CardContainer = (props) => {
 };
 
 CardContainer.propTypes = {
-  cardList : PropTypes.arrayOf(PropTypes.object).isRequired
+  cardList : PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteCard: PropTypes.func.isRequired
 };
 
 export default CardContainer;
