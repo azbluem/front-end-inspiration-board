@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [boardList, setBoardList] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState('Select a board from the board list');
+  const [selectedBoardId, setSelectedBoardId] = useState(-1)
   const [cards, setCards] = useState([])
 
   const URL = "http://127.0.0.1:5000/board";
@@ -41,8 +42,15 @@ function App() {
         break
 
       }
-    } setSelectedBoard(`${chosenBoard.title} - ${chosenBoard.owner}`)
+    } setSelectedBoardId(chosenBoard.id)
+    setSelectedBoard(`${chosenBoard.title} - ${chosenBoard.owner}`)
     renderCards(chosenBoard.cards)
+  }
+
+  const addBoard = (newBoardData) => {
+    axios.post(URL,newBoardData)
+    .then(()=>{getAllBoards()})
+    .catch((error)=>(console.log(error)))
   }
 
   const renderCards = (cards) => {
@@ -53,6 +61,26 @@ function App() {
       returnCards.push(cardList[i])
     }
     setCards(returnCards)
+  }
+
+  const addCard = (newCardData) => {
+    let cardId
+    axios.post(`${URL}/${selectedBoardId}`,newCardData)
+    .then((response)=> {
+      console.log(response)
+      cardId = response.data.id
+    })
+    .then(()=> {
+      console.log(cardId)
+      newCardData['id']=cardId
+      const newCardList = [
+        ...cards
+      ]
+      newCardList.push(newCardData)
+      console.log(newCardList)
+      renderCards(newCardList)
+    })
+    .catch((error)=>(console.log(error)))
   }
 
   const deleteCard = (cardId) => {
@@ -81,13 +109,13 @@ function App() {
         <BoardInfo selectedBoard ={selectedBoard}></BoardInfo>
       </div>
       <div className="new-board-form">
-        <NewBoardForm></NewBoardForm>
+        <NewBoardForm addBoard={addBoard}></NewBoardForm>
       </div>
       <div className="card-container">
         <CardContainer cardList ={cards} deleteCard={deleteCard}></CardContainer>
       </div>
       <div className="new-card-form">
-        <NewCardForm></NewCardForm>
+        <NewCardForm addCard={addCard}></NewCardForm>
       </div>
     </div>
   );
