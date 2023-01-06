@@ -23,13 +23,16 @@ const NewCardForm = ({ addCard }) => {
   };
 
   const SubmitButton = () => {
-    if (cardFormData.message) {
+    if (cardFormData.message && cardFormData.message.length < 41) {
       return <button type="submit">Add Card</button>;
     } else {
       return (
-        <button type="submit" disabled>
+        <div>
+          <button type="submit" disabled>
           Add Card
-        </button>
+        </button><span>   Characters limit 40 </span>
+        </div>
+        
       );
     }
   };

@@ -80,6 +80,7 @@ function App() {
       })
       .then(() => {
         newCardData["id"] = cardId;
+        newCardData["likes"] = 0;
         const newCardList = [...cards];
         newCardList.push(newCardData);
         renderCards(newCardList);

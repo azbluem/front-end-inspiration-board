@@ -28,9 +28,12 @@ const NewBoardForm = ({ addBoard }) => {
       return <button type="submit">Add Board</button>;
     } else {
       return (
-        <button type="submit" disabled>
+        <div>
+          <button type="submit" disabled>
           Add Board
-        </button>
+        </button><span>  Please enter title and owner</span>
+        </div>
+        
       );
     }
   };
