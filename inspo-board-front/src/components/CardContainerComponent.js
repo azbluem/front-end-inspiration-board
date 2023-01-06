@@ -29,7 +29,7 @@ const CardContainer = (props) => {
 CardContainer.propTypes = {
   cardList: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteCard: PropTypes.func.isRequired,
-  boardTitle: PropTypes.string
+  boardTitle: PropTypes.string,
 };
 
 export default CardContainer;
