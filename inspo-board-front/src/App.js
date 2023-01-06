@@ -15,7 +15,7 @@ function App() {
   });
   const [cards, setCards] = useState([]);
 
-  const URL = "http://127.0.0.1:5000/board";
+  const URL = "https://meowtains-backend.herokuapp.com/board";
 
   const getAllBoards = () => {
     axios
