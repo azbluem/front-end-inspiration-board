@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Card from "../components/CardComponent.js";
+import "./CardContainerComponent.css";
 
 const CardContainer = (props) => {
   const cardList = props.cardList;
@@ -20,8 +21,10 @@ const CardContainer = (props) => {
 
   return (
     <div>
-      <h2>Cards For {boardTitle}</h2>
-      <div>{cardRenders}</div>
+      <h2>
+        Cards For <span className="board-title">{boardTitle}</span>
+      </h2>
+      <div className="inner-card-container">{cardRenders}</div>
     </div>
   );
 };

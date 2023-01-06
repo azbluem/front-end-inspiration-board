@@ -1,0 +1,8 @@
+.inner-card-container {
+    display: grid;
+    grid-template: auto auto auto / auto auto auto;
+  }
+
+.board-title {
+    font-style: italic;
+}

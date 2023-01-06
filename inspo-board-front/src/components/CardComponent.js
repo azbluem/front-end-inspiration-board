@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
+import "./CardComponent.css";
 
 const Card = ({ id, message, likes, deleteCard }) => {
   return (
-    <div>
+    <div className="card">
       <h4>{message}</h4>
       <span>{likes}💕</span>
       <button
@@ -19,7 +20,7 @@ const Card = ({ id, message, likes, deleteCard }) => {
 Card.propTypes = {
   id: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
-  likes: PropTypes.number.isRequired,
+  likes: PropTypes.number,
   deleteCard: PropTypes.func.isRequired,
 };
 

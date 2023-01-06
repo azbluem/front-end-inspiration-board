@@ -48,6 +48,7 @@ const NewBoardForm = ({ addBoard }) => {
           onChange={handleFormChange}
         ></input>
         <br></br>
+        <br></br>
         <label htmlFor="owner">Owner: </label>
         <input
           type="text"
