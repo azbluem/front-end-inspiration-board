@@ -22,7 +22,7 @@ const CardContainer = (props) => {
   return (
     <div>
       <h2>
-        Cards For <span className="board-title">{boardTitle}</span>
+      Cards For <span className="board-title">{boardTitle}</span>
       </h2>
       <div className="inner-card-container">{cardRenders}</div>
     </div>

@@ -85,6 +85,7 @@ function App() {
         newCardData["likes"] = 0;
         const newCardList = [...cards];
         newCardList.push(newCardData);
+        // For this section, we could use an axios pull and useEffect but we're afraid of getting billed
         const newBoardList = []
         for (const board of boardList) {
           if (board.id !==selectedBoard.board.id) {
@@ -95,7 +96,7 @@ function App() {
             newBoardList.push(board)
           }
         }
-        setBoardList(newBoardList)
+        setBoardList(newBoardList) 
         renderCards(newCardList);
       })
       .catch((error) => console.log(error));
@@ -116,6 +117,29 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const ReturnsCardContainer = () => {
+    if (selectedBoard.board.id) {
+      return(
+        <div >
+        <CardContainer
+          cardList={cards}
+          deleteCard={deleteCard}
+          boardTitle={selectedBoard.board.title}
+        ></CardContainer>
+      </div>)
+
+    }
+  }
+
+  const ReturnsCardForm = () => {
+    if (selectedBoard.board.id) {
+      return(
+      <div>
+        <NewCardForm addCard={addCard}></NewCardForm>
+      </div>)
+    }
+  }
+
   return (
     <div className="container">
       <div className="header">
@@ -130,16 +154,8 @@ function App() {
       <div className="new-board-form">
         <NewBoardForm addBoard={addBoard}></NewBoardForm>
       </div>
-      <div className="card-container">
-        <CardContainer
-          cardList={cards}
-          deleteCard={deleteCard}
-          boardTitle={selectedBoard.board.title}
-        ></CardContainer>
-      </div>
-      <div className="new-card-form">
-        <NewCardForm addCard={addCard}></NewCardForm>
-      </div>
+      <div className="card-container"><ReturnsCardContainer/></div>
+      <div className="new-card-form"> <ReturnsCardForm/></div>
     </div>
   );
 }

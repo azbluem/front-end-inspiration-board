@@ -1,6 +1,6 @@
 .inner-card-container {
     display: grid;
-    grid-template: auto auto auto / auto auto auto;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
   }
 
 .board-title {
