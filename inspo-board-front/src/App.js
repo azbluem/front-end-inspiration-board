@@ -33,16 +33,18 @@ function App() {
       });
   };
 
+  const findOneBoard = (boardId) => {
+    for (const board of boardList) {
+      if (board.id === boardId) {
+        return board
+      }
+    }
+  }
+
   useEffect(getAllBoards, []);
 
   const selectBoard = (boardId) => {
-    let chosenBoard;
-    for (const board of boardList) {
-      if (board.id === boardId) {
-        chosenBoard = board;
-        break;
-      }
-    }
+    const chosenBoard = findOneBoard(boardId)
 
     setSelectedBoard({
       board: chosenBoard,
@@ -83,6 +85,17 @@ function App() {
         newCardData["likes"] = 0;
         const newCardList = [...cards];
         newCardList.push(newCardData);
+        const newBoardList = []
+        for (const board of boardList) {
+          if (board.id !==selectedBoard.board.id) {
+            newBoardList.push(board)
+          }
+          else {
+            board.cards = newCardList
+            newBoardList.push(board)
+          }
+        }
+        setBoardList(newBoardList)
         renderCards(newCardList);
       })
       .catch((error) => console.log(error));
