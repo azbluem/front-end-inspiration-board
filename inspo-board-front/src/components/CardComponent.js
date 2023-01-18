@@ -23,6 +23,7 @@ Card.propTypes = {
   message: PropTypes.string.isRequired,
   likes: PropTypes.number,
   deleteCard: PropTypes.func.isRequired,
+  likeCard:PropTypes.func.isRequired
 };
 
 export default Card;
