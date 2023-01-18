@@ -8,6 +8,7 @@ const INITIAL_BOARD_DATA = {
 
 const NewBoardForm = ({ addBoard }) => {
   const [boardFormData, setBoardFormData] = useState(INITIAL_BOARD_DATA);
+  const [hidden, setHidden] = useState(false)
 
   const handleFormChange = (e) => {
     const newBoardData = {
@@ -38,10 +39,16 @@ const NewBoardForm = ({ addBoard }) => {
     }
   };
 
-  return (
-    <div>
-      <h2>Create a New Board</h2>
-      <form onSubmit={submitBoardForm}>
+  const toggleBoardForm = () => {
+    setHidden(!hidden);
+  }
+
+  const HideBoardForm = () => {
+    if (hidden) {
+      return(<div></div>)
+    } else {
+      return ( 
+<form onSubmit={submitBoardForm}>
         <label htmlFor="title">Title: </label>
         <input
           type="text"
@@ -67,6 +74,16 @@ const NewBoardForm = ({ addBoard }) => {
         <br></br>
         <SubmitButton />
       </form>
+      )
+    }
+  }
+
+  return (
+    <div>
+      <h2>Create a New Board</h2>
+      <HideBoardForm/>
+      <br></br>
+      <button onClick={toggleBoardForm}>Toggle Board Form</button>
     </div>
   );
 };

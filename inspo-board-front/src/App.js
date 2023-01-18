@@ -90,6 +90,23 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const likeCard = (cardId) => {
+    axios.patch(`${URL}/${selectedBoard.board.id}/${cardId}`)
+    .then(()=> {
+      const newCardList = [];
+      for (const card of cards) {
+        if (cardId !== card.id) {
+          newCardList.push(card);
+        } else {
+          card.likes++
+          newCardList.push(card)
+        }
+      }
+      setCards(newCardList);
+    })
+    .catch((error)=>console.log(error))
+  }
+
   const deleteCard = (cardId) => {
     axios
       .delete(`${URL}/${selectedBoard.board.id}/${cardId}`)
@@ -112,6 +129,7 @@ function App() {
         <CardContainer
           cardList={cards}
           deleteCard={deleteCard}
+          likeCard = {likeCard}
           boardTitle={selectedBoard.board.title}
         ></CardContainer>
       </div>)

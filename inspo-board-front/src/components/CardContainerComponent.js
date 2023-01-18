@@ -6,6 +6,7 @@ const CardContainer = (props) => {
   const cardList = props.cardList;
   const boardTitle = props.boardTitle;
   const deleteCard = props.deleteCard;
+  const likeCard = props.likeCard
   const cardRenders = cardList.map((card) => {
     return (
       <div key={card.id}>
@@ -14,6 +15,7 @@ const CardContainer = (props) => {
           message={card.message}
           likes={card.likes}
           deleteCard={deleteCard}
+          likeCard={likeCard}
         />
       </div>
     );
@@ -33,6 +35,7 @@ CardContainer.propTypes = {
   cardList: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteCard: PropTypes.func.isRequired,
   boardTitle: PropTypes.string,
+  likeCard:PropTypes.func.isRequired
 };
 
 export default CardContainer;
