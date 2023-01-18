@@ -41,7 +41,7 @@ function App() {
     }
   }
 
-  useEffect(getAllBoards, []);
+  useEffect(getAllBoards, [cards]);
 
   const selectBoard = (boardId) => {
     const chosenBoard = findOneBoard(boardId)
@@ -85,18 +85,6 @@ function App() {
         newCardData["likes"] = 0;
         const newCardList = [...cards];
         newCardList.push(newCardData);
-        // For this section, we could use an axios pull and useEffect but we're afraid of getting billed
-        const newBoardList = []
-        for (const board of boardList) {
-          if (board.id !==selectedBoard.board.id) {
-            newBoardList.push(board)
-          }
-          else {
-            board.cards = newCardList
-            newBoardList.push(board)
-          }
-        }
-        setBoardList(newBoardList) 
         renderCards(newCardList);
       })
       .catch((error) => console.log(error));
