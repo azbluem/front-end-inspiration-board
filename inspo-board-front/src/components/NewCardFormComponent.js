@@ -29,10 +29,10 @@ const NewCardForm = ({ addCard }) => {
       return (
         <div>
           <button type="submit" disabled>
-          Add Card
-        </button><span>   Characters limit 40 </span>
+            Add Card
+          </button>
+          <span> Characters limit 40 </span>
         </div>
-        
       );
     }
   };

@@ -36,15 +36,15 @@ function App() {
   const findOneBoard = (boardId) => {
     for (const board of boardList) {
       if (board.id === boardId) {
-        return board
+        return board;
       }
     }
-  }
+  };
 
   useEffect(getAllBoards, [cards]);
 
   const selectBoard = (boardId) => {
-    const chosenBoard = findOneBoard(boardId)
+    const chosenBoard = findOneBoard(boardId);
 
     setSelectedBoard({
       board: chosenBoard,
@@ -54,7 +54,6 @@ function App() {
   };
 
   const addBoard = (newBoardData) => {
-    console.log("add board is clicked");
     axios
       .post(URL, newBoardData)
       .then(() => {
@@ -91,21 +90,22 @@ function App() {
   };
 
   const likeCard = (cardId) => {
-    axios.patch(`${URL}/${selectedBoard.board.id}/${cardId}`)
-    .then(()=> {
-      const newCardList = [];
-      for (const card of cards) {
-        if (cardId !== card.id) {
-          newCardList.push(card);
-        } else {
-          card.likes++
-          newCardList.push(card)
+    axios
+      .patch(`${URL}/${selectedBoard.board.id}/${cardId}`)
+      .then(() => {
+        const newCardList = [];
+        for (const card of cards) {
+          if (cardId !== card.id) {
+            newCardList.push(card);
+          } else {
+            card.likes++;
+            newCardList.push(card);
+          }
         }
-      }
-      setCards(newCardList);
-    })
-    .catch((error)=>console.log(error))
-  }
+        setCards(newCardList);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const deleteCard = (cardId) => {
     axios
@@ -124,27 +124,28 @@ function App() {
 
   const ReturnsCardContainer = () => {
     if (selectedBoard.board.id) {
-      return(
-        <div >
-        <CardContainer
-          cardList={cards}
-          deleteCard={deleteCard}
-          likeCard = {likeCard}
-          boardTitle={selectedBoard.board.title}
-        ></CardContainer>
-      </div>)
-
+      return (
+        <div>
+          <CardContainer
+            cardList={cards}
+            deleteCard={deleteCard}
+            likeCard={likeCard}
+            boardTitle={selectedBoard.board.title}
+          ></CardContainer>
+        </div>
+      );
     }
-  }
+  };
 
   const ReturnsCardForm = () => {
     if (selectedBoard.board.id) {
-      return(
-      <div>
-        <NewCardForm addCard={addCard}></NewCardForm>
-      </div>)
+      return (
+        <div>
+          <NewCardForm addCard={addCard}></NewCardForm>
+        </div>
+      );
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -160,8 +161,13 @@ function App() {
       <div className="new-board-form">
         <NewBoardForm addBoard={addBoard}></NewBoardForm>
       </div>
-      <div className="card-container"><ReturnsCardContainer/></div>
-      <div className="new-card-form"> <ReturnsCardForm/></div>
+      <div className="card-container">
+        <ReturnsCardContainer />
+      </div>
+      <div className="new-card-form">
+        {" "}
+        <ReturnsCardForm />
+      </div>
     </div>
   );
 }
